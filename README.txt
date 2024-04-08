@@ -6,20 +6,6 @@ A. Bitte führen Sie die Entwicklung des vorgegebenen Kniffel Spiels fort.
 
 	Folgende Funktionalitäten fehlen oder sind zu erweitern. Bitte beachten Sie alle "@TODO" Kommentare in kniffel.html, script.js und style.css.
 
-		2. Wurde ein Punktefeld bereits ausgewählt, z.B. Einser, darf man hier kein weiteres mal Punkte zuweisen.
-
-		3. Pro Runde sind maximal drei Würfe erlaubt. Spätestens jetzt müssen die Würfel einem freien Punktefeld zugewiesen werden.
-
-		4. Zentrieren Sie den "Würfeln" Button.
-
-		5. Führen Sie die Rahmen der Tabellenzellen und den der Tabelle zusammen (die sichtbaren Abstände zwischen den Zellen verschwinden).
-
-		6. Erweitern Sie die Wertetabelle und Funktionalität, damit auch Dreier, Vierer, Fünfer und Sechser ausgewählt werden können.
-
-		7. Verhindern Sie, dass die Würfel gehalten oder losgelassen werden können, bevor mindestens einmal gewürfelt wurde.
-
-		8. Setzen Sie die Anzahl der getätigten Würfe zurück, wenn eine Runde beendet wurde.
-
 		9. Berechnen Sie einen Dreier- und Viererpasch.
 
 		10. Wenn die Würfel einem Punktefeld zugewiesen werden, merken Sie sich in einer frei wählbaren Form, welche fünf Würfelwerte es zu diesem Zeitpunkt sind,

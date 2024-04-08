@@ -19,12 +19,18 @@ var rolled = 0;
  */
 var values = [];
 
+const roll_limit = 3;
+
 /**
  * Alle Würfel werfen
  *
  * @return void
  */
 function rollDices() {
+	if (rolled >= roll_limit) {
+		return;
+	}
+
 	// Alle HTML Elemente mit der CSS Klasse "dice" ermitteln
 	var dices = document.getElementsByClassName('dice');
 
@@ -56,12 +62,15 @@ function rollDices() {
  * @return void
  */
 function assignDices(field, type) {
+
+	if (field.classList.contains('filled')) {
+		return
+	}
+
 	// @TODO Verhindern Sie, dass die Würfel einem Feld mehr als einmal zugewiesen werden können
 
 	// Die zu vergebenden Punkte
 	var points = 0;
-
-	console.log(type)
 
 	// Punkte berechnen
 	switch (type) {
@@ -107,6 +116,8 @@ function assignDices(field, type) {
 			break;
 	}
 
+	field.classList.add('filled')
+
 	// Punkte zuweisen
 	field.innerHTML = points;
 
@@ -117,20 +128,23 @@ function assignDices(field, type) {
 	// Runde zurücksetzen
 	resetRound();
 
+	rolled	= 0;
+
 }
 
 /**
  * Einser bis Sechser berechnen
  *
- * @param number num
  * @return number
+ * @param num
  */
 function getEinserBisSechser(num) {
 	var points = 0;
+	var dices = document.getElementsByClassName('dice');
 
-	for (var i = 0; i < values.length; i++) {
-		if (values[i] == num) {
-			points += num;
+	for (var i = 0; i < dices.length; i++) {
+		if (dices[i].value == num) {
+			points  = points + num;
 		}
 	}
 
@@ -145,17 +159,44 @@ function getEinserBisSechser(num) {
  */
 function getPasch(num) {
 	var points = 0;
+	var arr = [];
 
 	// Alle HTML Elemente mit der CSS Klasse "dice" ermitteln
 	var dices = document.getElementsByClassName('dice');
 
 	for (var i = 0; i < dices.length; i++) {
-		console.log(dices[i].value)
-
-		// dices[i].value;
+		if (dices[i].value != 0){
+			arr.push(dices[i].value);
+		}
 	}
 
-	// @TODO Berechnen Sie einen Dreier- und Viererpasch
+	arr.sort()
+
+	switch(num) {
+		case 3:
+			for (var x =0; x < arr.length; x++) {
+				if (arr[x] == arr[x+1] && arr[x+1] == arr[x+2]) {
+					points+=25
+					break
+				}
+			}
+			break;
+		case 4:
+			for (var x =0; x < arr.length; x++) {
+				if (arr[x] == arr[x+1] && arr[x+1] == arr[x+2] && arr[x+2] == arr[x+3]) {
+					points+=30
+					break
+				}
+			}
+			break;
+		case 5:
+			if (arr.length >= 5) {
+				if (arr[0] == arr[1] && arr[1] == arr[2] && arr[2] == arr[3] && arr [3] == arr [4]) {
+					points+=50
+					break
+				}
+			}
+	}
 
 	return points;
 }
@@ -197,6 +238,7 @@ function getChance() {
 
 	// @TODO Berechnen Sie eine Chance
 
+
 	return points;
 }
 
@@ -229,7 +271,10 @@ function resetRound() {
  * @return void
  */
 function toggleDice(dice) {
-	// @TODO Verhindern Sie, dass die Würfel gehalten oder losgelassen werden können, bevor mindestens einmal gewürfelt wurde
+
+	if (rolled <= 0) {
+		return
+	}
 
 	if (dice.getAttribute('data-hold')) {
 		// Das HTML Attribut "data-hold" existiert bereits und wird entfernt

@@ -5,7 +5,9 @@
 	html, body {
 		font-family: Verdana, Arial, Helvetica;
 	}
-
+	table,th,td {
+		border-collapse: collapse;
+	}
 	/* Spielfeld zentrieren */
 	.container {
 		width: 50%;
@@ -70,6 +72,8 @@
 
 	/* Darstellung des Buttons */
 	#roll {
+		margin: 0 auto 10px;
+		text-align: center;
 		cursor: pointer;
 		display: block;
 		padding: 10px;
@@ -89,16 +93,16 @@
 	}
 
 	th, td {
-		width: 50%;
-		padding: 10px;
+		width: 70%;
+		padding: 15px;
 	}
 
 	/* Felder bei einem Mouseover hervorheben */
-	td:not(#score) {
+	td:not(#score):not(#bonus63):not(#zwischensumme):not(.filled) {
 		cursor: pointer;
 	}
 
-	td:not(#score):hover {
+	td:not(#score):not(#bonus63):not(#zwischensumme):not(.filled):hover {
 		background-color: lightgray;
 	}
 
