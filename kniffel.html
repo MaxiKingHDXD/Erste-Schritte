@@ -14,98 +14,111 @@
 	<body>
 		<div class="container">
 			<!-- Alle Würfel -->
-			<button class="dice" onclick="toggleDice(this)" value="5"></button>
+			<button class="dice" onclick="toggleDice(this)" value=""></button>
 			<!-- this ist der Zeiger auf das HTML Element, welches das Ereignis, hier onclick, auslöst -->
-			<button class="dice" onclick="toggleDice(this)" value="5"></button>
-			<button class="dice" onclick="toggleDice(this)" value="5"></button>
-			<button class="dice" onclick="toggleDice(this)" value="5"></button>
-			<button class="dice" onclick="toggleDice(this)" value="5"></button>
+			<button class="dice" onclick="toggleDice(this)" value=""></button>
+			<button class="dice" onclick="toggleDice(this)" value=""></button>
+			<button class="dice" onclick="toggleDice(this)" value=""></button>
+			<button class="dice" onclick="toggleDice(this)" value=""></button>
 
 			<!-- Button zum Würfeln -->
 			<button id="roll"  onclick="rollDices()">Würfeln</button>
-
+			<button id="gameover"  onclick="endGame">Spiel beenden</button>
 			<!-- Wertetabelle -->
 			<table>
 				<tbody>
 					<tr>
 						<th>Einser</th>
+						<th></th>
 						<td onclick="assignDices(this, 'einser')"></td>
 					</tr>
 
 					<tr>
 						<th>Zweier</th>
+						<th></th>
 						<td onclick="assignDices(this, 'zweier')"></td>
 					</tr>
 
 					<tr>
 						<th>Dreier</th>
-						<td onclick="assignDices(this, 'dreier')"></td>
+						<th></th>
+						<td onclick="assignDices(this, 'dreier')" class="dreier"></td>
 					</tr>
 
 					<tr>
 						<th>Vierer</th>
+						<th></th>
 						<td onclick="assignDices(this, 'vierer')"></td>
 					</tr>
 
 					<tr>
 						<th>Fünfer</th>
+						<th></th>
 						<td onclick="assignDices(this, 'fünfer')"></td>
 					</tr>
 
 					<tr>
 						<th>Sechser</th>
+						<th></th>
 						<td onclick="assignDices(this, 'sechser')"></td>
 					</tr>
 
 					<tr class="fix">
 						<th>Bonus bei 63</th>
-						<td id="bonus63">0</td>
+						<td id="bonus63" colspan="2">0</td>
 					</tr>
 
 					<tr class="fix">
 						<th>Zwischensumme</th>
-						<td id="zwischensumme">0</td>
+						<td id="zwischensumme" colspan="2">0</td>
 					</tr>
 
 					<tr>
 						<th>Dreierpasch</th>
+						<th></th>
 						<td onclick="assignDices(this, 'dreierpasch')"></td>
 					</tr>
 
 					<tr>
 						<th>Viererpasch</th>
+						<th></th>
 						<td onclick="assignDices(this, 'viererpasch')"></td>
 					</tr>
 
 					<tr>
 						<th>Full House</th>
+						<th></th>
 						<td onclick="assignDices(this, 'fullhouse')"></td>
 					</tr>
 
 					<tr>
 						<th>Kleine Straße</th>
+						<th></th>
 						<td onclick="assignDices(this, 'kleinestraße')"></td>
 					</tr>
 
 					<tr>
 						<th>Großse Straße</th>
+						<th></th>
 						<td onclick="assignDices(this, 'großestraße')"></td>
 					</tr>
 
 					<tr>
 						<th>Kniffel</th>
+						<th></th>
 						<td onclick="assignDices(this, 'kniffel')"></td>
 					</tr>
 
 					<tr>
 						<th>Chance</th>
+						<th></th>
 						<td onclick="assignDices(this, 'chance')"></td>
 					</tr>
 
 					<!-- Gesamtpunktzahl -->
 					<tr class="fix">
 						<th>Gesamt</th>
-						<td id="score">0</td>
+						<td id="score" colspan="2">0</td>
 					</tr>
 				</tbody>
 			</table>

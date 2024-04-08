@@ -6,20 +6,10 @@ A. Bitte führen Sie die Entwicklung des vorgegebenen Kniffel Spiels fort.
 
 	Folgende Funktionalitäten fehlen oder sind zu erweitern. Bitte beachten Sie alle "@TODO" Kommentare in kniffel.html, script.js und style.css.
 
-		9. Berechnen Sie einen Dreier- und Viererpasch.
-
 		10. Wenn die Würfel einem Punktefeld zugewiesen werden, merken Sie sich in einer frei wählbaren Form, welche fünf Würfelwerte es zu diesem Zeitpunkt sind,
 			so dass jederzeit nachvollzogen werden kann, welche fünf Würfelwerte zum Zeitpunkt der Zuweisung für z.B. Dreierpasch verwendet wurden.
 
 	Wenn Sie eine Ausbildung oder höher im Bereich Anwendungsentwicklung abgeschlossen oder langjährige Praxiserfahrung haben, dann werden an Sie auch folgende Zusatzaufgaben gestellt:
-
-		11. Berechnen Sie ein Fullhouse.
-
-		12. Berechnen Sie eine kleine und große Straße.
-
-		13. Berechnen Sie Kniffel und Chance.
-
-		14. Wenn die Gesamtpunktzahl aller eingetragenen Punkte von Einser bis Sechser mindestens 63 ist, dann erhält man 35 Bonuspunkte.
 
 		15. Stellen Sie fest, dass das Spiel beendet ist (alle Punktefelder wurden gesetzt) und stellen diesen Zustand optisch dar.
 

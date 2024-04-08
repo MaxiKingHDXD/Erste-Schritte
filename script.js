@@ -4,6 +4,7 @@
  * @var number
  */
 var score = 0;
+var score63 = 0;
 
 /**
  * Anzahl der getätigten Würfe in dieser Runde
@@ -38,12 +39,10 @@ function rollDices() {
 	values = [];
 
 	for (var i = 0; i < dices.length; i++) {
-		if (dices[i].hasAttribute("data-hold")) {
-			continue;
-		}
-
 		// Eine Zufallszahl zwischen 1 und 6 generieren und dem Würfel zuweisen
-		dices[i].value = Math.floor((Math.random() * 6) + 1);
+		if (!dices[i].hasAttribute("data-hold")) {
+			dices[i].value = Math.floor((Math.random() * 6) + 1);
+		}
 
 		// Aktuellen Würfelwert merken
 		var value = parseInt(dices[i].value);
@@ -54,6 +53,14 @@ function rollDices() {
 	rolled++;
 }
 
+
+/**
+ *
+ */
+function addDiceIcon(zahl, element) {
+	element.insertAdjacentHTML('beforeend', "<span class='extra-dice' data-value='" + zahl + "'></span>")
+}
+
 /**
  * Würfel einem Feld zuweisen
  *
@@ -62,10 +69,13 @@ function rollDices() {
  * @return void
  */
 function assignDices(field, type) {
-
-	if (field.classList.contains('filled')) {
+	if (rolled < 1 || field.classList.contains('filled')) {
 		return
 	}
+
+	values.forEach(a => {
+		addDiceIcon(a, field.previousElementSibling)
+	})
 
 	// @TODO Verhindern Sie, dass die Würfel einem Feld mehr als einmal zugewiesen werden können
 
@@ -76,42 +86,61 @@ function assignDices(field, type) {
 	switch (type) {
 		// Einser bis Sechser @TODO Erweitern Sie, damit auch Dreier, Vierer, Fünfer und Sechser berechnet werden
 		case 'einser':
+
 			points = getEinserBisSechser(1);
+			score63 += points;
 			break;
 		case 'zweier':
+
 			points = getEinserBisSechser(2);
+			score63 += points;
 			break;
 		case 'dreier':
+
 			points = getEinserBisSechser(3);
+			score63 += points;
 			break;
 		case 'vierer':
+
 			points = getEinserBisSechser(4);
+			score63 += points;
 			break;
 		case 'fünfer':
+
 			points = getEinserBisSechser(5);
+			score63 += points;
 			break;
 		case 'sechser':
+
 			points = getEinserBisSechser(6);
+			score63 += points;
 			break;
 		case 'dreierpasch':
+
 			points = getPasch(3);
 			break;
 		case 'viererpasch':
+
 			points = getPasch(4);
 			break;
 		case 'fullhouse':
+
 			points = getFullHouse();
 			break;
 		case 'kleinestraße':
+
 			points = getStreak(4);
 			break;
-		case 'großsestraße':
+		case 'großestraße':
+
 			points = getStreak(5);
 			break;
 		case 'kniffel':
+
 			points = getPasch(5);
 			break;
 		case 'chance':
+
 			points = getChance();
 			break;
 	}
@@ -123,7 +152,14 @@ function assignDices(field, type) {
 
 	// Gesamtpunktzahl erhöhen und in das HTML Element mit der ID score schreiben
 	score += points;
+	console.log(score63);
+	if (score63 >= 63 && document.getElementById('bonus63').innerHTML == "") {
+		score+=35
+		document.getElementById('bonus63').innerHTML = '35'
+	}
+
 	document.getElementById('score').innerHTML = score;
+	document.getElementById('zwischensumme').innerHTML = score63;
 
 	// Runde zurücksetzen
 	resetRound();
@@ -176,7 +212,9 @@ function getPasch(num) {
 		case 3:
 			for (var x =0; x < arr.length; x++) {
 				if (arr[x] == arr[x+1] && arr[x+1] == arr[x+2]) {
-					points+=25
+					for (var f =0; f < arr.length; f++){
+						points += parseInt(arr[f])
+					}
 					break
 				}
 			}
@@ -184,7 +222,9 @@ function getPasch(num) {
 		case 4:
 			for (var x =0; x < arr.length; x++) {
 				if (arr[x] == arr[x+1] && arr[x+1] == arr[x+2] && arr[x+2] == arr[x+3]) {
-					points+=30
+					for (var f =0; f < arr.length; f++){
+						points += parseInt(arr[f])
+					}
 					break
 				}
 			}
@@ -208,6 +248,23 @@ function getPasch(num) {
  */
 function getFullHouse() {
 	var points = 0;
+	var arr = [];
+
+	// Alle HTML Elemente mit der CSS Klasse "dice" ermitteln
+	var dices = document.getElementsByClassName('dice');
+	for (var i = 0; i < dices.length; i++) {
+		if (dices[i].value != 0){
+			arr.push(dices[i].value);
+		}
+	}
+
+	arr.sort()
+
+	console.log(arr)
+
+	if (arr.length >= 5 && (arr[0] == arr[1] && arr[1] == arr[2] && arr[3] == arr[4] || arr[0] == arr[1] && arr[2] == arr[3] && arr[3] == arr[4])) {
+		points += 25
+	}
 
 	// @TODO Berechnen von FullHouse
 
@@ -222,8 +279,34 @@ function getFullHouse() {
  */
 function getStreak(num) {
 	var points = 0;
+	var arr = [];
 
-	// @TODO Berechnen Sie eine Straße
+	// Alle HTML Elemente mit der CSS Klasse "dice" ermitteln
+	var dices = document.getElementsByClassName('dice');
+
+	for (var i = 0; i < dices.length; i++) {
+		if (dices[i].value != 0){
+			arr.push(dices[i].value);
+		}
+	}
+
+	arr.sort()
+	arr =  [...new Set(arr)];
+
+	switch(num) {
+		case 4:
+			if(arr.length == 4 && parseInt(arr[0])+1 == arr[1] && parseInt(arr[1])+1 == arr[2] && parseInt(arr[2])+1 == parseInt(arr[3])) {
+				points += 30
+			}
+
+			break;
+		case 5:
+			if (arr.length == 5 && parseInt(arr[0])+1 == arr[1] && parseInt(arr[1])+1 == arr[2] && parseInt(arr[2])+1 == arr[3] && parseInt(arr[3])+1 == arr[4]) {
+				points += 40
+			}
+			break;
+
+	}
 
 	return points;
 }
@@ -235,6 +318,14 @@ function getStreak(num) {
  */
 function getChance() {
 	var points = 0;
+
+	// Alle HTML Elemente mit der CSS Klasse "dice" ermitteln
+	var dices = document.getElementsByClassName('dice');
+
+
+	for (var f =0; f < dices.length; f++){
+		points += parseInt(dices[f].value)
+	}
 
 	// @TODO Berechnen Sie eine Chance
 
@@ -283,7 +374,7 @@ function toggleDice(dice) {
 		// Das HTML Attribut "data-hold" existiert noch nicht und wird gesetzt
 		dice.setAttribute('data-hold', 1);
 	}
+	// Refresh the page
 
-	// Fokus auf diesen Würfel entfernen
 	dice.blur();
 }

@@ -16,7 +16,7 @@
 	}
 
 	/* Darstellung eines Würfels */
-	.dice {
+	.dice, .extra-dice {
 		width: 50px;
 		height: 50px;
 		margin: 10px;
@@ -29,32 +29,38 @@
 	}
 
 	/* Würfel mit dem Wert 1 */
-	.dice[value="1"] {
+	.dice[value="1"],
+	.extra-dice[data-value="1"] {
 		background-image: url("img/1.png");
 	}
 
 	/* Würfel mit dem Wert 2 */
-	.dice[value="2"] {
+	.dice[value="2"],
+	.extra-dice[data-value="2"] {
 		background-image: url("img/2.png");
 	}
 
 	/* Würfel mit dem Wert 3 */
-	.dice[value="3"] {
+	.dice[value="3"],
+	.extra-dice[data-value="3"] {
 		background-image: url("img/3.png");
 	}
 
 	/* Würfel mit dem Wert 4 */
-	.dice[value="4"] {
+	.dice[value="4"],
+	.extra-dice[data-value="4"] {
 		background-image: url("img/4.png");
 	}
 
 	/* Würfel mit dem Wert 5 */
-	.dice[value="5"] {
+	.dice[value="5"],
+	.extra-dice[data-value="5"] {
 		background-image: url("img/5.png");
 	}
 
 	/* Würfel mit dem Wert 6 */
-	.dice[value="6"] {
+	.dice[value="6"],
+	.extra-dice[data-value="6"] {
 		background-image: url("img/6.png");
 	}
 
@@ -93,7 +99,7 @@
 	}
 
 	th, td {
-		width: 70%;
+		width: 40%;
 		padding: 15px;
 	}
 
