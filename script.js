@@ -176,7 +176,9 @@ function getPasch(num) {
 		case 3:
 			for (var x =0; x < arr.length; x++) {
 				if (arr[x] == arr[x+1] && arr[x+1] == arr[x+2]) {
-					points+=25
+					for (var f =0; f < arr.length; f++){
+						points += parseInt(arr[f])
+					}
 					break
 				}
 			}
@@ -184,7 +186,9 @@ function getPasch(num) {
 		case 4:
 			for (var x =0; x < arr.length; x++) {
 				if (arr[x] == arr[x+1] && arr[x+1] == arr[x+2] && arr[x+2] == arr[x+3]) {
-					points+=30
+					for (var f =0; f < arr.length; f++){
+						points += parseInt(arr[f])
+					}
 					break
 				}
 			}
@@ -222,7 +226,25 @@ function getFullHouse() {
  */
 function getStreak(num) {
 	var points = 0;
+	var arr = [];
 
+	// Alle HTML Elemente mit der CSS Klasse "dice" ermitteln
+	var dices = document.getElementsByClassName('dice');
+
+	for (var i = 0; i < dices.length; i++) {
+		if (dices[i].value != 0){
+			arr.push(dices[i].value);
+		}
+	}
+
+	arr.sort()
+
+	switch(num) {
+		case 1:
+			for (var x =0; x < arr.length; x++) {
+				if (arr[x]  )
+			}
+	}
 	// @TODO Berechnen Sie eine Straße
 
 	return points;
